@@ -16,6 +16,8 @@ const kValueCardBig =
 
 const kPaddingPage = EdgeInsets.fromLTRB(34, 48, 34, 0);
 
+const kLabel = Text('▬', style: TextStyle(fontSize: 12));
+
 const kboxDecoration = BoxDecoration(
   color: Colors.white,
   boxShadow: [

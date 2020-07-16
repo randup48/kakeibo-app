@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AlertFalse extends StatelessWidget {
+  AlertFalse(this.alert);
+  final String alert;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -9,8 +11,10 @@ class AlertFalse extends StatelessWidget {
       content: Center(
         heightFactor: 1.5,
         child: Container(
-          child:
-              Text('There\'s no enough money? \ntry to input your Cash first.'),
+          child: Text(
+            alert,
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
       contentTextStyle:

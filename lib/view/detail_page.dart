@@ -14,7 +14,7 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: kPaddingPage,
+          padding: kPaddingPage.copyWith(bottom: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

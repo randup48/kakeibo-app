@@ -19,8 +19,6 @@ class _AddPageState extends State<AddPage> {
   final contentController = TextEditingController();
 
   String dropdownInput;
-  String amountInput;
-  String contentInput;
 
   @override
   void dispose() {
@@ -52,15 +50,15 @@ class _AddPageState extends State<AddPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'Expense \nReceipt',
+                      'Daily \nReceipt',
                       style: kHeaderTextStyle,
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 34.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.0),
-                          color: Colors.grey[50],
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
@@ -99,13 +97,14 @@ class _AddPageState extends State<AddPage> {
                                     contentPadding: EdgeInsets.all(24.0),
                                     labelText: 'Category',
                                     labelStyle: kHeadline,
-                                    fillColor: Colors.white,
+                                    fillColor: Colors.grey[100],
                                     filled: true,
                                     border: OutlineInputBorder(),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0),
-                                    ),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 0),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
                                   ),
                                 ),
                                 InputField(
@@ -120,9 +119,6 @@ class _AddPageState extends State<AddPage> {
                                   label: 'Amount',
                                   typeKeyboard: TextInputType.numberWithOptions(
                                       decimal: true),
-                                  onChanged: (input) {
-                                    amountInput = input;
-                                  },
                                   onPressed: () {
                                     amountController.clear();
                                   },
@@ -134,9 +130,6 @@ class _AddPageState extends State<AddPage> {
                                   controller: contentController,
                                   label: 'Content',
                                   hint: 'What did you spend?',
-                                  onChanged: (input) {
-                                    contentInput = input;
-                                  },
                                   onPressed: () {
                                     contentController.clear();
                                   },
@@ -160,12 +153,16 @@ class _AddPageState extends State<AddPage> {
                                   context: context,
                                   builder: (context) => AlertTrue(
                                     title:
-                                        'Are You Sure \nWant to Submit This Receipt?',
+                                        'Are You Sure Want to \nSubmit This Receipt?',
+                                    children: Text(
+                                      'This receipt will be displayed \non the monthly expense',
+                                      textAlign: TextAlign.center,
+                                    ),
                                     onPressed: () {
                                       dailyExpenses.addTransaction(
                                           dropdownInput,
-                                          amountInput,
-                                          contentInput,
+                                          amountController.text,
+                                          contentController.text,
                                           DateTime.now());
                                       _formKey.currentState.reset();
                                       Navigator.pop(context);
@@ -176,7 +173,8 @@ class _AddPageState extends State<AddPage> {
                               } else {
                                 showDialog(
                                     context: context,
-                                    builder: (context) => AlertFalse());
+                                    builder: (context) => AlertFalse(
+                                        'There\'s no enough money \non your Cash'));
                                 _formKey.currentState.reset();
                               }
                             }

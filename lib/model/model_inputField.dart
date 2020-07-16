@@ -5,7 +5,6 @@ class InputField extends StatelessWidget {
   InputField(
       {this.label,
       this.prefix,
-      this.onChanged,
       this.typeKeyboard,
       this.hint,
       this.controller,
@@ -15,7 +14,6 @@ class InputField extends StatelessWidget {
   final String label;
   final Widget prefix;
   final String hint;
-  final Function onChanged;
   final TextInputType typeKeyboard;
   final TextEditingController controller;
   final Function onPressed;
@@ -36,11 +34,12 @@ class InputField extends StatelessWidget {
           hintText: hint,
           hintStyle: TextStyle(color: Colors.black45),
           labelText: label,
-          fillColor: Colors.white,
+          fillColor: Colors.grey[100],
           filled: true,
           border: OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white, width: 0),
+            borderRadius: BorderRadius.circular(10.0)
           ),
           suffixIcon: IconButton(
             icon: Icon(Icons.clear,color: Colors.black87,),
@@ -48,7 +47,6 @@ class InputField extends StatelessWidget {
             onPressed: onPressed,
           ),
         ),
-        onChanged: onChanged,
       ),
     );
   }

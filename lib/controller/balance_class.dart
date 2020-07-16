@@ -6,7 +6,6 @@ import 'package:kakeibo/model/transaction.dart';
 
 class Balance with ChangeNotifier {
   int cash = 0;
-  int expenses = 0;
   int savings = 0;
   List<Transaction> _transcation = [];
 
@@ -19,7 +18,6 @@ class Balance with ChangeNotifier {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var transactionData = prefs.getStringList('Transaction');
       var cashData = prefs.getInt('cash');
-      var expensesData = prefs.getInt('expenses');
       var savingsData = prefs.getInt('savings');
 
       if (transactionData != null) {
@@ -30,10 +28,6 @@ class Balance with ChangeNotifier {
 
       if (cashData != null) {
         cash = cashData;
-      }
-
-      if (expensesData != null) {
-        expenses = expensesData;
       }
 
       if (savingsData != null) {
@@ -91,6 +85,35 @@ class Balance with ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteAll() {
+    _transcation.clear();
+    cash = 0;
+    savings = 0;
+    updateCash();
+    updateSavings();
+    updateList();
+  }
+
+  void deleteThisMonth(DateTime dateTime) {
+    _transcation.removeWhere((e) => e.date.month == dateTime.month);
+    updateList();
+  }
+
+  void takenSavings(
+      String takensavingsInput, DateTime dateTime, String content) {
+    final takensaving = Transaction(
+      amount: int.parse(takensavingsInput),
+      category: 'Taken Savings',
+      content: content,
+      date: dateTime,
+    );
+    _transcation.add(takensaving);
+    savings -= int.parse(takensavingsInput);
+    updateList();
+    updateSavings();
+    notifyListeners();
+  }
+
   void addTransaction(String dropdownInput, String amountInput,
       String contentInput, DateTime dateInput) {
     final transaction = Transaction(
@@ -101,10 +124,8 @@ class Balance with ChangeNotifier {
     );
     _transcation.add(transaction);
     cash -= int.parse(amountInput);
-    expenses += int.parse(amountInput);
     updateList();
     updateCash();
-    updateExpenses();
     notifyListeners();
   }
 
@@ -124,12 +145,6 @@ class Balance with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     await prefs.setInt('cash', cash);
-  }
-
-  Future updateExpenses() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    await prefs.setInt('expenses', expenses);
   }
 
   Future updateSavings() async {

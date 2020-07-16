@@ -22,10 +22,7 @@ class AddFeature extends StatelessWidget {
             textAlign: TextAlign.center,
             style: kHeadline.copyWith(color: Colors.black87),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: children,
-          ),
+          children,
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: ButtonTheme(

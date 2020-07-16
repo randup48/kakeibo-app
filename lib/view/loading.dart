@@ -1,6 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:kakeibo/scaffold.dart';
+import 'package:kakeibo/scaffolde.dart';
 
 class Loading extends StatefulWidget {
   @override
