@@ -7,7 +7,7 @@ class TipsPage extends StatefulWidget {
 }
 
 class _TipsPageState extends State<TipsPage> {
-  final storycontroller = StoryController();
+  final storyController = StoryController();
 
   List<StoryItem> tips = [
     StoryItem.text(
@@ -38,7 +38,7 @@ class _TipsPageState extends State<TipsPage> {
           Navigator.pop(context);
         },
         storyItems: tips,
-        controller: storycontroller,
+        controller: storyController,
         onComplete: () {
           Navigator.pop(context);
         },

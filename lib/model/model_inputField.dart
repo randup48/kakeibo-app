@@ -18,6 +18,7 @@ class InputField extends StatelessWidget {
   final TextEditingController controller;
   final Function onPressed;
   final Function validator;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,11 +39,13 @@ class InputField extends StatelessWidget {
           filled: true,
           border: OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 0),
-            borderRadius: BorderRadius.circular(10.0)
-          ),
+              borderSide: BorderSide(color: Colors.white, width: 0),
+              borderRadius: BorderRadius.circular(10.0)),
           suffixIcon: IconButton(
-            icon: Icon(Icons.clear,color: Colors.black87,),
+            icon: Icon(
+              Icons.clear,
+              color: Colors.black87,
+            ),
             padding: EdgeInsets.all(16.0),
             onPressed: onPressed,
           ),

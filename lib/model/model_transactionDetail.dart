@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kakeibo/constant.dart';
 
-class TransactitonDetail extends StatelessWidget {
-  TransactitonDetail({this.category, this.amount, this.onTap, this.leading});
+class TransactionDetail extends StatelessWidget {
+  TransactionDetail({this.category, this.amount, this.onTap, this.leading});
 
   final String category;
   final int amount;
   final Function onTap;
   final Widget leading;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

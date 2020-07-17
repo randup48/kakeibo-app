@@ -27,7 +27,7 @@ class DetailPage extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemBuilder: (context, index) => TransactitonDetail(
+                  itemBuilder: (context, index) => TransactionDetail(
                     category: data[data.length - 1 - index]['content'],
                     amount: data[data.length - 1 - index]['amount'],
                     leading: Text(DateFormat('EEEE,\ndd/MM\n/y.')

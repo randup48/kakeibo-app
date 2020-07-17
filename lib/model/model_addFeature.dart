@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kakeibo/constant.dart';
-
 import 'model_Button.dart';
 
 class AddFeature extends StatelessWidget {
@@ -35,5 +34,3 @@ class AddFeature extends StatelessWidget {
     );
   }
 }
-
-

@@ -9,7 +9,9 @@ import 'package:kakeibo/model/model_inputField.dart';
 
 class AddPage extends StatefulWidget {
   AddPage(this.pageController);
+
   final PageController pageController;
+
   @override
   _AddPageState createState() => _AddPageState();
 }

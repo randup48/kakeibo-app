@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:kakeibo/constant.dart';
 import 'package:kakeibo/controller/balance_class.dart';
 import 'package:kakeibo/model/model_transactionTile.dart';
-
 import 'detail_page.dart';
 
 class StatsPage extends StatefulWidget {
@@ -245,7 +244,7 @@ class _StatsPageState extends State<StatsPage> {
                 dataMap.isNotEmpty && dataMap != null
                     ? Expanded(
                         child: ListView.builder(
-                          itemBuilder: (context, index) => TransactitonTile(
+                          itemBuilder: (context, index) => TransactionTile(
                             category: thisCategory[index]['category'],
                             amount: amountCategory[index]['amount'],
                             onTap: () {

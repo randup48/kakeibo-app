@@ -15,7 +15,9 @@ import 'package:kakeibo/model/model_card.dart';
 
 class NotePage extends StatefulWidget {
   NotePage(this.pageController);
+
   final PageController pageController;
+
   @override
   _NotePageState createState() => _NotePageState();
 }
@@ -23,8 +25,8 @@ class NotePage extends StatefulWidget {
 class _NotePageState extends State<NotePage> {
   final cashController = TextEditingController();
   final savingsController = TextEditingController();
-  final takensavingsController = TextEditingController();
-  final contenttakensavingsController = TextEditingController();
+  final takenSavingsController = TextEditingController();
+  final contentTakenSavingsController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -63,12 +65,11 @@ class _NotePageState extends State<NotePage> {
                       ),
                     ),
                     Cards(
-                      inputedValue: Consumer<Balance>(
+                      inputValue: Consumer<Balance>(
                           builder: (_, cashObject, __) => Text(
                                 'Rp. ${NumberFormat('###,###').format(cashObject.cash)}',
                                 style: kValueCardBig.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 40),
+                                    fontWeight: FontWeight.w600, fontSize: 40),
                               )),
                       icon: Icons.account_balance_wallet,
                       title: 'Cash',
@@ -89,8 +90,7 @@ class _NotePageState extends State<NotePage> {
                                       child: InputField(
                                         controller: cashController,
                                         prefix: Padding(
-                                          padding:
-                                              EdgeInsets.only(right: 16.0),
+                                          padding: EdgeInsets.only(right: 16.0),
                                           child: Text('Rp.'),
                                         ),
                                         typeKeyboard:
@@ -133,7 +133,7 @@ class _NotePageState extends State<NotePage> {
                       ),
                     ),
                     Cards(
-                      inputedValue: Consumer<Balance>(
+                      inputValue: Consumer<Balance>(
                           builder: (_, savingsObject, __) => Text(
                                 'Rp. ${NumberFormat('###,###').format(savingsObject.savings)}',
                                 style: kValueCardBig.copyWith(
@@ -189,12 +189,11 @@ class _NotePageState extends State<NotePage> {
                                                 children: [
                                                   InputField(
                                                     controller:
-                                                        takensavingsController,
+                                                        takenSavingsController,
                                                     label: 'Amount',
                                                     prefix: Padding(
-                                                      padding:
-                                                          EdgeInsets.only(
-                                                              right: 16.0),
+                                                      padding: EdgeInsets.only(
+                                                          right: 16.0),
                                                       child: Text('Rp.'),
                                                     ),
                                                     typeKeyboard: TextInputType
@@ -205,18 +204,18 @@ class _NotePageState extends State<NotePage> {
                                                         ? 'You haven\'t input anything yet'
                                                         : null,
                                                     onPressed: () {
-                                                      takensavingsController
+                                                      takenSavingsController
                                                           .clear();
                                                     },
                                                   ),
                                                   InputField(
                                                     controller:
-                                                        contenttakensavingsController,
+                                                        contentTakenSavingsController,
                                                     hint:
                                                         'Why you take this savings?',
                                                     label: 'Content',
                                                     onPressed: () {
-                                                      contenttakensavingsController
+                                                      contentTakenSavingsController
                                                           .clear();
                                                     },
                                                     validator: (value) => value
@@ -228,8 +227,7 @@ class _NotePageState extends State<NotePage> {
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 20),
+                                              padding: EdgeInsets.only(top: 20),
                                               child: ButtonTheme(
                                                 height: 48,
                                                 child: Button(
@@ -238,30 +236,28 @@ class _NotePageState extends State<NotePage> {
                                                         .validate()) {
                                                       if (balance.savings >=
                                                           int.parse(
-                                                              takensavingsController
+                                                              takenSavingsController
                                                                   .text)) {
-                                                        Navigator.pop(
-                                                            context);
+                                                        Navigator.pop(context);
                                                         showDialog(
                                                           context: context,
-                                                          builder:
-                                                              (context) =>
-                                                                  AlertTrue(
+                                                          builder: (context) =>
+                                                              AlertTrue(
                                                             title:
                                                                 'Are You Sure Want to \nUse Your Savings?',
                                                             children: Text(
                                                                 'This is the savings you used'),
                                                             onPressed: () {
                                                               balance.takenSavings(
-                                                                  takensavingsController
+                                                                  takenSavingsController
                                                                       .text,
                                                                   DateTime
                                                                       .now(),
-                                                                  contenttakensavingsController
+                                                                  contentTakenSavingsController
                                                                       .text);
-                                                              takensavingsController
+                                                              takenSavingsController
                                                                   .clear();
-                                                              contenttakensavingsController
+                                                              contentTakenSavingsController
                                                                   .clear();
                                                               Navigator.pop(
                                                                   context);
@@ -273,8 +269,7 @@ class _NotePageState extends State<NotePage> {
                                                           ),
                                                         );
                                                       } else {
-                                                        Navigator.pop(
-                                                            context);
+                                                        Navigator.pop(context);
                                                         showDialog(
                                                           context: context,
                                                           builder: (context) =>
@@ -331,18 +326,17 @@ class _NotePageState extends State<NotePage> {
                                             controller: savingsController,
                                             label: 'Amount',
                                             prefix: Padding(
-                                              padding: EdgeInsets.only(
-                                                  right: 16.0),
+                                              padding:
+                                                  EdgeInsets.only(right: 16.0),
                                               child: Text('Rp.'),
                                             ),
-                                            typeKeyboard: TextInputType
-                                                .numberWithOptions(
+                                            typeKeyboard:
+                                                TextInputType.numberWithOptions(
                                                     decimal: true),
                                             onPressed: () {
                                               savingsController.clear();
                                             },
-                                            validator: (value) => value
-                                                    .isEmpty
+                                            validator: (value) => value.isEmpty
                                                 ? 'You haven\'t input anything yet'
                                                 : null,
                                           ),
@@ -370,8 +364,7 @@ class _NotePageState extends State<NotePage> {
                                                               .clear();
                                                           Navigator.pop(
                                                               context);
-                                                          widget
-                                                              .pageController
+                                                          widget.pageController
                                                               .jumpToPage(2);
                                                         },
                                                       ));
@@ -402,12 +395,17 @@ class _NotePageState extends State<NotePage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0)),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>TipsPage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TipsPage()));
                   },
-                  icon: Icon(Icons.wb_incandescent,color: Colors.orange[300],),
+                  icon: Icon(
+                    Icons.wb_incandescent,
+                    color: Colors.orange[300],
+                  ),
                   label: Text(
                     'Tips'.toUpperCase(),
-                    style: TextStyle(letterSpacing: 1.25,color: Colors.black54),
+                    style:
+                        TextStyle(letterSpacing: 1.25, color: Colors.black54),
                   ),
                 )
               ],

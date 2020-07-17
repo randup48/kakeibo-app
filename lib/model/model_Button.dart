@@ -11,7 +11,11 @@ class Button extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       color: Colors.orange[300],
       onPressed: onPressed,
-      icon: Icon(Icons.create,size: 16.0,color: Colors.white,),
+      icon: Icon(
+        Icons.create,
+        size: 16.0,
+        color: Colors.white,
+      ),
       label: Text(
         'WRITE THAT',
         style: TextStyle(

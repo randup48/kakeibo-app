@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class AlertFalse extends StatelessWidget {
   AlertFalse(this.alert);
+
   final String alert;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

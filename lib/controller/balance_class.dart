@@ -7,7 +7,7 @@ import 'package:kakeibo/model/transaction.dart';
 class Balance with ChangeNotifier {
   int cash = 0;
   int savings = 0;
-  List<Transaction> _transcation = [];
+  List<Transaction> _transaction = [];
 
   Balance() {
     syncData();
@@ -21,7 +21,7 @@ class Balance with ChangeNotifier {
       var savingsData = prefs.getInt('savings');
 
       if (transactionData != null) {
-        _transcation = transactionData
+        _transaction = transactionData
             .map((e) => Transaction.fromMap(json.decode(e)))
             .toList();
       }
@@ -47,7 +47,7 @@ class Balance with ChangeNotifier {
     'Transport',
     'Culture',
     'Household',
-    'Apprel',
+    'Apparel',
     'Beauty',
     'Health',
     'Education',
@@ -60,7 +60,7 @@ class Balance with ChangeNotifier {
   }
 
   UnmodifiableListView get transaction {
-    return UnmodifiableListView(_transcation);
+    return UnmodifiableListView(_transaction);
   }
 
   void addCash(String cashInput) {
@@ -76,7 +76,7 @@ class Balance with ChangeNotifier {
       content: 'Savings',
       date: dateTime,
     );
-    _transcation.add(saving);
+    _transaction.add(saving);
     savings += int.parse(savingsInput);
     cash -= int.parse(savingsInput);
     updateList();
@@ -86,7 +86,7 @@ class Balance with ChangeNotifier {
   }
 
   void deleteAll() {
-    _transcation.clear();
+    _transaction.clear();
     cash = 0;
     savings = 0;
     updateCash();
@@ -95,20 +95,20 @@ class Balance with ChangeNotifier {
   }
 
   void deleteThisMonth(DateTime dateTime) {
-    _transcation.removeWhere((e) => e.date.month == dateTime.month);
+    _transaction.removeWhere((e) => e.date.month == dateTime.month);
     updateList();
   }
 
   void takenSavings(
-      String takensavingsInput, DateTime dateTime, String content) {
-    final takensaving = Transaction(
-      amount: int.parse(takensavingsInput),
+      String takenSavingsInput, DateTime dateTime, String content) {
+    final takenSaving = Transaction(
+      amount: int.parse(takenSavingsInput),
       category: 'Taken Savings',
       content: content,
       date: dateTime,
     );
-    _transcation.add(takensaving);
-    savings -= int.parse(takensavingsInput);
+    _transaction.add(takenSaving);
+    savings -= int.parse(takenSavingsInput);
     updateList();
     updateSavings();
     notifyListeners();
@@ -122,7 +122,7 @@ class Balance with ChangeNotifier {
       content: contentInput,
       date: dateInput,
     );
-    _transcation.add(transaction);
+    _transaction.add(transaction);
     cash -= int.parse(amountInput);
     updateList();
     updateCash();
@@ -131,11 +131,11 @@ class Balance with ChangeNotifier {
 
   Future updateList() async {
     try {
-      List<String> theTransactoin =
-          _transcation.map((e) => json.encode(e.toMap())).toList();
+      List<String> theTransaction =
+          _transaction.map((e) => json.encode(e.toMap())).toList();
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      await prefs.setStringList('Transaction', theTransactoin);
+      await prefs.setStringList('Transaction', theTransaction);
     } catch (e) {
       print(e);
     }

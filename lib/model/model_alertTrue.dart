@@ -6,6 +6,7 @@ class AlertTrue extends StatelessWidget {
   final Function onPressed;
   final String title;
   final Widget children;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -30,7 +31,8 @@ class AlertTrue extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0)),
                   onPressed: onPressed,
                   child: Text('YES',
-                      style: TextStyle(color: Colors.white, letterSpacing: 1.25)),
+                      style:
+                          TextStyle(color: Colors.white, letterSpacing: 1.25)),
                   color: Colors.orange[300],
                 ),
                 FlatButton(
@@ -39,8 +41,8 @@ class AlertTrue extends StatelessWidget {
                   },
                   child: Text(
                     'NOPE',
-                    style:
-                        TextStyle(color: Colors.orange[300], letterSpacing: 1.25),
+                    style: TextStyle(
+                        color: Colors.orange[300], letterSpacing: 1.25),
                   ),
                 )
               ],

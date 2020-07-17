@@ -4,7 +4,6 @@ import 'package:kakeibo/view/add_page.dart';
 import 'package:kakeibo/view/note_page.dart';
 import 'package:kakeibo/view/stats_page.dart';
 import 'package:provider/provider.dart';
-
 import 'controller/balance_class.dart';
 
 class Scaffolde extends StatefulWidget {
@@ -13,20 +12,21 @@ class Scaffolde extends StatefulWidget {
 }
 
 class _ScaffoldeState extends State<Scaffolde> {
-  int _selecetedindex = 0;
-  final _pagecontroller = PageController();
+  int _selectedIndex = 0;
 
-  void _ontap(int index) {
+  final _pageController = PageController();
+
+  void _onTap(int index) {
     setState(() {
-      _selecetedindex = index;
+      _selectedIndex = index;
     });
-    _pagecontroller.jumpToPage(_selecetedindex);
+    _pageController.jumpToPage(_selectedIndex);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _pagecontroller.dispose();
+    _pageController.dispose();
   }
 
   @override
@@ -38,15 +38,15 @@ class _ScaffoldeState extends State<Scaffolde> {
         create: (context) => Balance(),
         child: PageView(
           physics: AlwaysScrollableScrollPhysics(),
-          controller: _pagecontroller,
+          controller: _pageController,
           children: [
-            NotePage(_pagecontroller),
-            AddPage(_pagecontroller),
+            NotePage(_pageController),
+            AddPage(_pageController),
             StatsPage(),
           ],
           onPageChanged: (page) {
             setState(() {
-              _selecetedindex = page;
+              _selectedIndex = page;
             });
           },
         ),
@@ -55,8 +55,8 @@ class _ScaffoldeState extends State<Scaffolde> {
         elevation: 0,
         backgroundColor: Colors.white,
         showUnselectedLabels: false,
-        currentIndex: _selecetedindex,
-        onTap: _ontap,
+        currentIndex: _selectedIndex,
+        onTap: _onTap,
         items: [
           BottomNavigationBarItem(
             icon: Padding(

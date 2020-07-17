@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kakeibo/constant.dart';
 
 class Cards extends StatelessWidget {
-  Cards({this.icon, this.title, this.trailing, this.inputedValue});
+  Cards({this.icon, this.title, this.trailing, this.inputValue});
 
   final String title;
   final IconData icon;
   final Widget trailing;
-  final Widget inputedValue;
+  final Widget inputValue;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class Cards extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 34, 16, 16),
-              child: inputedValue,
+              child: inputValue,
             )
           ],
         ),
